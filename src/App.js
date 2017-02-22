@@ -8,6 +8,8 @@ import {
 
 import { Delete } from 'admin-on-rest/lib/mui';
 
+// User authentication
+import authClient from './authClient';
 // Dashboard
 import Dashboard from './Dashboard';
 
@@ -25,7 +27,7 @@ import PostIcon from 'material-ui/svg-icons/action/book';
 import UserIcon from 'material-ui/svg-icons/social/group';
 
 const App = () => (
-    <Admin restClient={jsonServerRestClient('http://jsonplaceholder.typicode.com')} dashboard={Dashboard}>
+    <Admin restClient={jsonServerRestClient('http://jsonplaceholder.typicode.com')} dashboard={Dashboard} authClient={authClient}>
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} remove={Delete} icon={PostIcon}/>
         <Resource name="users" list={UserList} icon={UserIcon}/>
     </Admin>
