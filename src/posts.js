@@ -16,11 +16,12 @@ import {
     ReferenceInput,
     SelectInput,
     SimpleForm,
-    TextInput
+    TextInput,
+    Filter
 } from 'admin-on-rest/lib/mui';
 
 export const PostList = (props) => (
-    <List {...props}>
+    <List {...props} filters={<PostFilter />} >
         <Datagrid>
             <TextField source="id"/>
             <ReferenceField label="User" source="userId" reference="users">
@@ -36,6 +37,15 @@ export const PostList = (props) => (
 const PostTitle = ({ record }) => {
     return <span>Edit post: {record ? `"${record.title}"` : ''}</span>;
 };
+
+const PostFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Search" source="q" alwaysOn />
+        <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+    </Filter>
+);
 
 export const PostEdit = (props) => (
     <Edit title={<PostTitle />} {...props}>
